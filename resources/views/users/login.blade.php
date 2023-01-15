@@ -13,6 +13,18 @@
             @else
                 <h4>Sign in</h4>
 
+                @if ($errors->any())
+                <x-alert type="danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>
+                                {{ $error }}
+                            </li>
+                        @endforeach
+                    </ul>
+                </x-alert>
+                @endif
+
                 <form method="post" action="{{ route('authenticate')  }}">
                     @csrf
 
