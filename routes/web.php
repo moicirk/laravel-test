@@ -19,5 +19,9 @@ Route::get('/login', [UsersController::class, 'login'])->name('login');
 Route::post('/authenticate', [UsersController::class, 'authenticate'])->name('authenticate');
 Route::get('/logout', [UsersController::class, 'logout'])->name('logout');
 
-Route::get('/', [TestsController::class, 'index'])->middleware('auth');
+Route::middleware(['auth'])->group(function () {
+    // TODO: get info how to make Tests also available by "/" route
+    Route::get('/', [TestsController::class, 'index']);
 
+    Route::resource('tests', TestsController::class);
+});
